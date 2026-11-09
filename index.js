@@ -1,3 +1,4 @@
+
 import express from "express"
 import cors from "cors"
 import mysql2 from "mysql2"
@@ -15,14 +16,17 @@ const sql = mysql2.createPool({
     database: process.env.NOME_BANCO
 });
 
-app.get("/", (request, response) => { 
+app.get("/", (request, response) => {
+
     const comandoSelect = "SELECT * FROM musicas_janainalima"
 
-    sql.query(comandoSelect, (error, data) => { 
+    sql.query(comandoSelect, (error, data) => {
+
         if(error){
             console.log(error)
             return
         }
+
         response.json(data)
     })
 })
