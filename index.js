@@ -13,13 +13,14 @@ const sql = mysql2.createPool({
     user: process.env.USUARIO_BANCO,
     password: process.env.SENHA_BANCO,
     database: process.env.NOME_BANCO
-})
+});
 
 app.get("/", (request, response) => { 
-    "SELECT * FROM musicas_janainalima"
-    ql.query(comandoSelect, (error, data) => { 
-        if(erro){
-            console.log("Error")
+    const comandoSelect = "SELECT * FROM musicas_janainalima"
+
+    sql.query(comandoSelect, (error, data) => { 
+        if(error){
+            console.log(error)
             return
         }
         response.json(data)
