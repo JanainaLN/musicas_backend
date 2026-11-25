@@ -1,4 +1,3 @@
-
 import express from "express"
 import cors from "cors"
 import mysql2 from "mysql2"
@@ -36,3 +35,18 @@ app.listen(3000, () => {
 })
 
 export default app
+
+app.post("/cadastrar", (request, response) => {
+    const { titulo, artista, genero, ano, duracao } = request.body
+
+    const comandoInsert = "INSERT INTO musicas_janainalima(titulo, artista, genero, ano, duracao) VALUES (?, ?, ?, ?, ?)"
+
+    sql.query(comandoInsert, [titulo, artista, genero, ano, duracao], (error) => {
+        if (error) {
+            console.log(error)
+            return
+        }
+
+        response.status(201).json({ mensagem: "Música cadastrada com sucesso!" })
+    })
+})
